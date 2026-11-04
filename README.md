@@ -1,58 +1,43 @@
-<div align="center">
+# personal-ai-assistant
 
-# 🔐 Personal AI Assistant
+A small assistant that runs entirely on my own computer with [Ollama](https://ollama.com). Nothing is sent to a cloud API.
 
-**Your own AI assistant. On your machine. Under your control.**
+It keeps a long-term memory in a local `memory.json` file. Anything you tell it with `remember:` is added to the system prompt of every future conversation.
 
-![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)
-![Ollama](https://img.shields.io/badge/Runs%20on-Ollama-000000?style=flat-square&logo=ollama&logoColor=white)
-![FastAPI](https://img.shields.io/badge/API-FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
-![Privacy](https://img.shields.io/badge/Privacy-100%25%20local-success?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
-
-</div>
-
----
-
-## ✨ Why
-
-Most AI assistants send every word you type to a big-tech cloud.
-This one runs **entirely on your own computer** using open-source models, and keeps a **long-term memory** of what you tell it — stored locally, in a file you own.
-
-## 🧩 Features
-
-- 🧠 **Long-term memory** — tell it `remember: ...` and it never forgets
-- 💬 **Terminal chat** — fast, simple, offline
-- 📱 **Phone access** — start the API server and chat from any device on your Wi-Fi
-- 🔁 **Any local model** — Llama, Mistral, Qwen, Gemma… anything Ollama can run
-- 🔐 **Zero cloud** — nothing leaves your machine
-
-## 🚀 Quick start
+## Setup
 
 ```bash
-# 1. Install Ollama (https://ollama.com) and pull a model
 ollama pull llama3.2
-
-# 2. Get the assistant
-git clone https://github.com/toureabdoul2050-alt/personal-ai-assistant.git
-cd personal-ai-assistant
 pip install requests fastapi uvicorn
-
-# 3. Chat in the terminal
 python assistant.py
-
-# 4. Or serve it to your phone
-python assistant.py --serve   # then open http://<your-computer-ip>:8000/docs
 ```
 
-## 🗺 Roadmap
+In the chat:
 
-- [x] Local chat with memory
-- [x] HTTP API for phone access
-- [ ] Voice input / output
-- [ ] Local documents search (RAG)
-- [ ] Simple mobile web interface
+- `remember: <something>` saves a fact
+- `memory` shows what it has saved
+- `quit` exits
 
----
+## Using it from a phone
 
-<div align="center">Built by <a href="https://github.com/toureabdoul2050-alt">Ladji Touré</a> · MIT License</div>
+```bash
+python assistant.py --serve
+```
+
+This starts a FastAPI server on port 8000. From any device on the same Wi-Fi, send a POST request to `http://<your-computer-ip>:8000/chat` with `{"text": "..."}`, or open `/docs` to try it in the browser.
+
+## Configuration
+
+- `ASSISTANT_MODEL` (default `llama3.2`)
+- `OLLAMA_URL` (default `http://localhost:11434/api/chat`)
+- `ASSISTANT_MEMORY` (default `memory.json`)
+
+## Ideas for later
+
+- Voice input and output
+- Searching my own documents
+- A simple mobile web page instead of the API docs
+
+## License
+
+MIT
