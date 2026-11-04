@@ -1,4 +1,4 @@
-"""Personal AI Assistant — 100% local chat with long-term memory (Ollama).
+"""Personal AI Assistant: 100% local chat with long-term memory (Ollama).
 
 Usage:
     python assistant.py            # chat in the terminal
@@ -66,7 +66,7 @@ def handle(history: list, message: str) -> str:
 
 def terminal() -> None:
     history: list = []
-    print(f"Personal AI Assistant ({MODEL}) — type 'quit' to exit.")
+    print(f"Personal AI Assistant ({MODEL}): type 'quit' to exit.")
     while True:
         try:
             message = input("\nyou > ")
